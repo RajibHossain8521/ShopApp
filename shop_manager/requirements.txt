@@ -1,0 +1,3 @@
+hyperlink==20.0.1
+idna==2.10
+secure-smtplib==0.1.1
