@@ -1,14 +1,12 @@
+import sys
 from tkinter import *
 from PIL import Image, ImageTk
 
+# Append lib path to system path
+sys.path.append('C:/Users/HP/Desktop/ShopApp/shop_manager/lib')
 # Local Packages
 import Window_reset_password
-
-def login(password):
-    """ Function : For verifying user password """
-    with open("C:\\Users\\HP\\Desktop\\ShopApp\\shop_manager\\sources\\login.txt", "r+") as log:
-        check_password = log.read()
-        print(check_password)    
+from login import login_validation
 
 
 def main_window():
@@ -65,4 +63,4 @@ def main_window():
 
 if __name__ == "__main__":
     main_window()
-    login(123)
+    login_validation(123)
