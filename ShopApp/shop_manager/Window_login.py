@@ -11,6 +11,7 @@ def set_new_password_window():
     password_reset_window.title("Reset Password")
     password_reset_window.mainloop()
 
+
 def main_window():
     # main window of shop app project
 
