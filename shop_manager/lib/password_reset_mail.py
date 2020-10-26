@@ -1,9 +1,10 @@
 import smtplib, ssl
+import random2
 
 
-def generate_auth_code():
-    pass
-
+def generate_reset_code():
+    reset_code = ''.join(random2.sample('0123456789ABCDEFGHIJ', 6))
+    print(reset_code)
 
 def send_reset_mail():
     port = 465 # SSL
@@ -22,3 +23,7 @@ def send_reset_mail():
     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
         server.login(sender_email, password)
         server.sendmail(sender_email, receiver_email, message)
+
+
+if __name__ == "__main__":
+    generate_reset_code()
