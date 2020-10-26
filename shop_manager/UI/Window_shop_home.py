@@ -2,7 +2,7 @@ from tkinter import *
 
 
 def shop_home_window():
-    """ This shop home window will show every data of shop """
+    
     home_window = Tk()
     home_window.title("Home Window")
 
@@ -13,6 +13,3 @@ def shop_home_window():
 
     # Run shop home window
     home_window.mainloop()
-
-if __name__ == "__main__":
-    shop_home_window()

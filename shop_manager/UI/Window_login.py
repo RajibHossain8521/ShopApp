@@ -1,66 +1,101 @@
 import sys
 from tkinter import *
+from tkinter import messagebox
 from PIL import Image, ImageTk
 
 # Append lib path to system path
 sys.path.append('C:/Users/HP/Desktop/ShopApp/shop_manager/lib')
 # Local Packages
-import Window_reset_password
 from login import login_validation
+from Window_shop_home import shop_home_window
+from Window_reset_password import password_reset_window
 
 
-def main_window():
-    # main window of shop app project
+def check_user_password():
+    global input_password
+    global login_window
 
-    main_window = Tk()
-    main_window.title("Login")
+    if login_validation(input_password.get()):
+        input_password.set("")
+        login_window.destroy()
+        shop_home_window()
+    else:
+        input_password.set("")
+        messagebox.showwarning("Login Info", "Incorrect Password")
 
-    # getting screen's height in pixels 
-    h = main_window.winfo_screenheight() 
-    # getting screen's width in pixels 
-    w = main_window.winfo_screenwidth() 
+
+# Driver Code
+if __name__ == "__main__":
+    """
+    Login Window: In this Driver code section we designed login window interface.
+    And called login function for checking user password for entry into shop home window.
+    """
+
+    # Create login window
+    login_window = Tk()
+    login_window.title("Login")
+
+    input_password = StringVar()
+
+    # getting screen's height & width in pixels
+    h = login_window.winfo_screenheight()
+    w = login_window.winfo_screenwidth()
     # Set app window size dynamically
-    main_window.geometry("%dx%d" % (w,h))
+    login_window.geometry("%dx%d" % (w, h))
 
     # Set background Image
     impage_file_path = 'C:\\Users\\HP\\Desktop\\ShopApp\\shop_manager\\sources\\login_page_photo.jpg'
-    main_window_image = Image.open(impage_file_path)
-    main_window_image = main_window_image.resize((w//2, h), Image.ANTIALIAS)
-    main_window_image = ImageTk.PhotoImage(main_window_image)
-    l = Label(image=main_window_image, anchor=W)
+    login_window_image = Image.open(impage_file_path)
+    login_window_image = login_window_image.resize((w//2, h), Image.ANTIALIAS)
+    login_window_image = ImageTk.PhotoImage(login_window_image)
+    l = Label(image=login_window_image, anchor=W)
     l.pack(fill=BOTH, expand=True)
 
     # Greetings Text
-    greetings = Label(main_window, text = "Welcome to Shop App!") 
-    greetings.config(font =("Courier", 30))
-    greetings.place(x = w//2+50, y = 80)
+    greetings = Label(
+        login_window,
+        text="Welcome to Shop App!",
+        font=("Courier", 30)
+    ).place(x=w//2+50, y=80)
 
     # Developer Info
-    developer_name = Label(main_window, text = "Developed By: Mohammad Rajib",)
-    developer_name.config(font =("Courier", 15))
-    developer_name.place(x = w//2+150, y=h-120)
+    developer_name = Label(
+        login_window,
+        text="Developed By: Mohammad Rajib",
+        font=("Courier", 15)
+    ).place(x=w//2+150, y=h-120)
 
     # Password field
-    pass_name = Label(main_window, text = "Password")
-    pass_name.config(font =("Courier", 15))
-    pass_name.place(x = w//2+100, y = 210)
-    password_field = Entry(main_window, bd = 3, show="*")
-    password_field.place(x = w//2+240, y = 210, height=30, width=150)
+    pass_name = Label(
+        login_window,
+        text="Password",
+        font=("Courier", 15)
+    ).place(x=w//2+100, y=210)
 
+    # Entry field for User Password
+    password_field = Entry(
+        login_window,
+        textvariable=input_password,
+        bd=3,
+        show="*")
+    password_field.pack()
+    password_field.place(x=w//2+240, y=210, height=30, width=150)
+  
     # Button : Password Enter
-    password_entry = Button(main_window, text = "Enter")
-    password_entry.place(x = w//2+240, y = 250, height=30, width=150)
+    submit_button = Button(
+        login_window, 
+        text="Enter",
+        command=check_user_password
+    )
+    submit_button.pack()
+    submit_button.place(x=w//2+240, y=250, height=30, width=150)
 
     # Button : Set new password
-    new_password_button = Button(main_window,
-                                text="Set New Password",
-                                command=Window_reset_password.new_password_window
-                                )
-    new_password_button.place(x = w//2+240, y=300, height=30, width=150)
+    new_password_button = Button(
+        login_window,
+        text="Set New Password",
+        command=password_reset_window
+    ).place(x=w//2+240, y=300, height=30, width=150)
 
     # Run tkinter window
-    main_window.mainloop()
-
-if __name__ == "__main__":
-    main_window()
-    login_validation(123)
+    login_window.mainloop()
