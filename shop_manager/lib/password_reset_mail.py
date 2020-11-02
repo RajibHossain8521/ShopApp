@@ -7,7 +7,7 @@ import hashlib
 file_path = 'C:/Users/HP/Desktop/ShopApp/shop_manager/shop/'
 
 
-def generate_reset_code():
+def generate_reset_code(email_address):
     reset_code = ''.join(random2.sample('0123456789ABCDEFGHIJ', 6))
     code = reset_code
     # Ecrypte the reset code
@@ -17,14 +17,15 @@ def generate_reset_code():
     with open(file_path+"reset_code.txt", "w") as log:
         log.write(encrypted_code)
 
-    send_reset_mail(code)
+    send_reset_mail(code, email_address)
 
 
-def send_reset_mail(code):
+def send_reset_mail(code, email_address):
+
     port = 465  # SSL
     smtp_server = "smtp.gmail.com"
     sender_email = "testmail8521@gmail.com"
-    receiver_email = "rajibhossain8521@gmail.com"
+    receiver_email = email_address
     password = "developer@123mail"
 
     subject = "Password Reset Mail"
@@ -51,9 +52,11 @@ def verify_reset_password_code(verify_code, new_password):
             new_password = str(new_password).encode()
             encrypted_password = hashlib.sha224(new_password).hexdigest()
             log.write(encrypted_password)
+        return True
 
     else:
-        print("Invalid Authentication Code")
+        # print("Invalid Authentication Code")
+        return False
 
 if __name__ == "__main__":
     #generate_reset_code()
