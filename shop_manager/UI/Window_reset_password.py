@@ -6,7 +6,29 @@ sys.path.append('C:/Users/HP/Desktop/ShopApp/shop_manager/lib')
 from password_reset_mail import *
 
 
-def password_reset_window():
+def send_mail():
+    global email_address
+    global reset_window
+
+    email = email_address.get()
+    generate_reset_code(email)
+    email_address.set("")
+
+def verify_reset_code():
+    global reset_code
+    global reset_window
+    global new_password
+
+    checking = verify_reset_password_code(reset_code, new_password)
+    if checking:
+        # raise pop up window for successfully set new password
+    if checking != True:
+        # raise failed window
+
+        
+if __name__ == "__main__":
+    
+    # password_reset_window()
     """ Design Code : New password window"""
 
     reset_window = Tk()
@@ -20,11 +42,37 @@ def password_reset_window():
 
     greetings = Label(reset_window, text="Set New Password!")
     greetings.config(font=("Courier", 30))
-    greetings.place(x=100, y=30)
+    greetings.place(x=150, y=30)
+
+    # Create label
+    mail_text = Label(
+        reset_window, 
+        text = "Your Mail Address",
+        font =("Courier", 14),
+    )
+    mail_text.pack()
+    mail_text.place(x=240, y=170)
+
+    email_address = StringVar()
+    # Entry field for User Password
+    email_field = Entry(
+        reset_window,
+        textvariable=email_address,
+        bd=3,
+    )
+    email_field.pack()
+    email_field.place(x=240, y=210, height=30, width=200)
+
+    # Button : Password Enter
+    email_submit_button = Button(
+        reset_window, 
+        text="Enter",
+        command=send_mail
+    )
+    email_submit_button.pack()
+    email_submit_button.place(x=240, y=250, height=30, width=200)
+
 
     # Run : Reset Window
     reset_window.mainloop()
 
-
-if __name__ == "__main__":
-    password_reset_window()
