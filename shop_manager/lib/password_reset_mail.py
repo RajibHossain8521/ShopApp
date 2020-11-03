@@ -2,9 +2,13 @@ import smtplib
 import ssl
 import random2
 import hashlib
+import re
 
 # reset code text file path
 file_path = 'C:/Users/HP/Desktop/ShopApp/shop_manager/shop/'
+
+def check_valid_email_address(email_address):
+    return True
 
 
 def generate_reset_code(email_address):
