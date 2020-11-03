@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 
 # Append lib path to system path
 sys.path.append('C:/Users/HP/Desktop/ShopApp/shop_manager/lib')
@@ -10,9 +11,14 @@ def send_mail():
     global email_address
     global reset_window
 
-    email = email_address.get()
-    generate_reset_code(email)
-    email_address.set("")
+    if check_valid_email_address(email_address):
+        email = email_address.get()
+        generate_reset_code(email)
+        email_address.set("")
+    else:
+        email_address.set("")
+        messagebox.showinfo("Email", "Invalid Email Address")
+        
 
 def verify_reset_code():
     global reset_code
@@ -22,8 +28,10 @@ def verify_reset_code():
     checking = verify_reset_password_code(reset_code, new_password)
     if checking:
         # raise pop up window for successfully set new password
+        messagebox.showinfo("Good Day!", "New Password Set Successfully.")
     if checking != True:
-        # raise failed window
+        # Invalid Authentication code! You may create new one
+        messagebox.showerror("Verification", "Invalid verificatio code! You may create new one")
 
         
 if __name__ == "__main__":
@@ -72,6 +80,14 @@ if __name__ == "__main__":
     email_submit_button.pack()
     email_submit_button.place(x=240, y=250, height=30, width=200)
 
+    # Create label
+    verify_text = Label(
+        reset_window, 
+        text = "Your Verification Code",
+        font =("Courier", 14),
+    )
+    verify_text.pack()
+    verify_text.place(x=220, y=300)
 
     # Run : Reset Window
     reset_window.mainloop()
