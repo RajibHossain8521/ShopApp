@@ -8,8 +8,9 @@ import re
 file_path = 'C:/Users/HP/Desktop/ShopApp/shop_manager/shop/'
 
 
-def check_valid_email_address(email_address):
-    return True
+def validate_email_address(email_address):
+    # CHECK VALID EMAIL ADDRESS
+    return re.match(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', email_address)
 
 
 def reset_code_mail(email_address):
@@ -28,7 +29,7 @@ def reset_code_mail(email_address):
     receiver_email = email_address
     password = "developer@123mail"
 
-    subject = "Password Reset Mail"
+    subject = "ShopApp - Password Reset Mail"
     body = "Hello Sir,\n\nSet your new PASSWORD with this validation code: " + \
         code + "\n\nThank you."
 
