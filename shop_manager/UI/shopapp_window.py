@@ -103,6 +103,7 @@ class Window_2:
         self.width = 1366
         self.height = 768
         self.master.geometry("%dx%d" % (self.width//2, self.height))
+        self.master.resizable(False, False)
         
         self.greetings = Label(
             self.master,
@@ -211,12 +212,12 @@ class Window_2:
 
     # SEND MAIL WITH RESET CODE
     def send_mail(self):
-        if check_valid_email_address(self.email_address.get()):
+        if validate_email_address(self.email_address.get()):
             reset_code_mail(self.email_address.get())
             self.email_address.set("")
         else:
             self.email_address.set("")
-            messagebox.showwarning("Login Info", "Incorrect Password")
+            messagebox.showwarning("Mail Info", "Invalid email address")
 
     # SET NEW PASSWORD AFTER VERIFYING VERIFICATION CODE
     def set_new_password(self):
