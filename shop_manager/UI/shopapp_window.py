@@ -7,9 +7,9 @@ from PIL import Image, ImageTk
 sys.path.append('C:/Users/HP/Desktop/ShopApp/shop_manager/lib')
 # Local Packages
 from login import login_validation
+from password_reset_mail import *
 
-# global input_password 
-# input_password = StringVar()
+
 global impage_file_path
 impage_file_path = 'C:\\Users\\HP\\Desktop\\ShopApp\\shop_manager\\sources\\login_page_photo.jpg'
 
@@ -145,7 +145,7 @@ class Window_2:
         text="Enter",
         font=("Courier", 14),
         bd = 3,
-        #command=send_mail
+        command=self.send_mail
         )
         self.email_submit_button.pack()
         self.email_submit_button.place(x=240, y=250, height=30, width=200)
@@ -203,11 +203,30 @@ class Window_2:
         text="Enter",
         font=("Courier", 14),
         bd=3,
-        #command=verify_reset_code
+        command=self.set_new_password
         )
         self.new_password_button.pack()
         self.new_password_button.place(x=240, y=510, height=30, width=200)
         # END STEP 02
+
+    # SEND MAIL WITH RESET CODE
+    def send_mail(self):
+        if check_valid_email_address(self.email_address.get()):
+            reset_code_mail(self.email_address.get())
+            self.email_address.set("")
+        else:
+            self.email_address.set("")
+            messagebox.showwarning("Login Info", "Incorrect Password")
+
+    # SET NEW PASSWORD AFTER VERIFYING VERIFICATION CODE
+    def set_new_password(self):
+        if verify_reset_password_code(self.verification_code.get(), self.new_password.get()):
+            # raise pop up window for successfully set new password
+            messagebox.showinfo("Good Day!", "New Password Set Successfully.")
+        else:
+            # Invalid Authentication code! You may create new one
+            messagebox.showerror("Verification", "Invalid verificatio code! You may create new one")
+
 
 if __name__ == "__main__":
     main()
