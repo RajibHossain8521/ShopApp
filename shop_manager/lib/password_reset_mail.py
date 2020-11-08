@@ -7,12 +7,13 @@ import re
 # reset code text file path
 file_path = 'C:/Users/HP/Desktop/ShopApp/shop_manager/shop/'
 
+
 def check_valid_email_address(email_address):
     return True
 
 
-def generate_reset_code(email_address):
-    reset_code = ''.join(random2.sample('0123456789ABCDEFGHIJ', 6))
+def reset_code_mail(email_address):
+    reset_code = ''.join(random2.sample('0123456789ABCDEF', 6))
     code = reset_code
     # Ecrypte the reset code
     reset_code = reset_code.encode()
@@ -20,11 +21,6 @@ def generate_reset_code(email_address):
 
     with open(file_path+"reset_code.txt", "w") as log:
         log.write(encrypted_code)
-
-    send_reset_mail(code, email_address)
-
-
-def send_reset_mail(code, email_address):
 
     port = 465  # SSL
     smtp_server = "smtp.gmail.com"
@@ -59,9 +55,11 @@ def verify_reset_password_code(verify_code, new_password):
         return True
 
     else:
-        # print("Invalid Authentication Code")
+        # Invalid Authentication Code
         return False
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
     #generate_reset_code()
-    verify_reset_password_code("9HF18C", 1234)
+    #verify_reset_password_code("9HF18C", 1234)
+    #val = ""
+    #reset_code_mail('rajibhossain8521@gmail.com')
