@@ -9,7 +9,6 @@ sys.path.append('C:/Users/HP/Desktop/ShopApp/shop_manager/lib')
 from login import login_validation
 from password_reset_mail import *
 
-
 global impage_file_path
 impage_file_path = 'C:\\Users\\HP\\Desktop\\ShopApp\\shop_manager\\sources\\login_page_photo.jpg'
 
@@ -91,6 +90,7 @@ class Window_1:
             messagebox.showwarning("Login Info", "Incorrect Password")
 
     def reset_window(self):
+        # Create window widget for Window_2 class
         self.window = Toplevel(self.master)
         self.app = Window_2(self.window)
 
@@ -194,6 +194,7 @@ class Window_2:
         self.master,
         textvariable=self.new_password,
         bd=3,
+        show="*",
         )
         self.new_password_field.pack()
         self.new_password_field.place(x=240, y=470, height=30, width=200)
@@ -224,6 +225,7 @@ class Window_2:
         if verify_reset_password_code(self.verification_code.get(), self.new_password.get()):
             # raise pop up window for successfully set new password
             messagebox.showinfo("Good Day!", "New Password Set Successfully.")
+            self.master.destroy()
         else:
             # Invalid Authentication code! You may create new one
             messagebox.showerror("Verification", "Invalid verificatio code! You may create new one")
