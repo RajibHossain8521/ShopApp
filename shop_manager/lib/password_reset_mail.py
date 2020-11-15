@@ -1,6 +1,6 @@
 import smtplib
 import ssl
-import random2
+import random
 import hashlib
 import re
 
@@ -14,7 +14,7 @@ def validate_email_address(email_address):
 
 
 def reset_code_mail(email_address):
-    reset_code = ''.join(random2.sample('0123456789ABCDEF', 6))
+    reset_code = ''.join(random.sample('0123456789ABCDEF', 6))
     code = reset_code
     # Ecrypte the reset code
     reset_code = reset_code.encode()
