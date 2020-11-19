@@ -8,6 +8,7 @@ sys.path.append('C:/Users/HP/Desktop/ShopApp/shop_manager/lib')
 # Local Packages
 from login import login_validation
 from password_reset_mail import *
+from home_window import Home_window
 
 global impage_file_path
 impage_file_path = 'C:\\Users\\HP\\Desktop\\ShopApp\\shop_manager\\sources\\login_page_photo.jpg'
@@ -84,7 +85,7 @@ class Window_1:
     def check_user_password(self):
         if login_validation(self.input_password.get()):
             self.input_password.set("")
-            self.master.destroy()
+            self.home_window()
         else:
             self.input_password.set("")
             messagebox.showwarning("Login Info", "Incorrect Password")
@@ -93,6 +94,10 @@ class Window_1:
         # Create window widget for Window_2 class
         self.window = Toplevel(self.master)
         self.app = Window_2(self.window)
+
+    def home_window(self):
+        self.window = Toplevel(self.master)
+        self.app = Home_window(self.window)
 
 
 class Window_2:
