@@ -3,9 +3,7 @@ import ssl
 import random
 import hashlib
 import re
-
-# reset code text file path
-file_path = 'C:/Users/HP/Desktop/ShopApp/shop_manager/shop/'
+import psycopg2
 
 
 def validate_email_address(email_address):
@@ -20,47 +18,75 @@ def reset_code_mail(email_address):
     reset_code = reset_code.encode()
     encrypted_code = hashlib.sha224(reset_code).hexdigest()
 
-    with open(file_path+"reset_code.txt", "w") as log:
-        log.write(encrypted_code)
+    # WRITE RESET CODE INFO DATABASE TABLE FOR OWNER
+    try:
+        connection = psycopg2.connect(
+            database='shop_management', 
+            user='postgres', 
+            password='12345',
+            port='5432')
 
-    port = 465  # SSL
-    smtp_server = "smtp.gmail.com"
-    sender_email = "testmail8521@gmail.com"
-    receiver_email = email_address
-    password = "developer@123mail"
+        cursor = connection.cursor()
+        encrypted_code = str(encrypted_code)
+        sql = ('''UPDATE owner_info SET verification_code='%s' WHERE sl=0''') % encrypted_code
+        cursor.execute(sql)
+        connection.commit()
+        connection.close()
 
-    subject = "ShopApp - Password Reset Mail"
-    body = "Hello Sir,\n\nSet your new PASSWORD with this validation code: " + \
-        code + "\n\nThank you."
+        port = 465  # SSL
+        smtp_server = "smtp.gmail.com"
+        sender_email = "testmail8521@gmail.com"
+        receiver_email = email_address
+        password = "developer@123mail"
 
-    message = 'Subject: {}\n\n{}'.format(subject, body)
+        subject = "ShopApp - Password Reset Mail"
+        body = "Hello Sir,\n\nSet your new PASSWORD with this validation code: " + \
+            code + "\n\nThank you."
 
-    context = ssl.create_default_context()
-    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
-        server.login(sender_email, password)
-        server.sendmail(sender_email, receiver_email, message)
+        message = 'Subject: {}\n\n{}'.format(subject, body)
 
-
-def verify_reset_password_code(verify_code, new_password):
-    with open(file_path+"reset_code.txt", "r") as log:
-        file_data = log.read()
-
-    verify_code = verify_code.encode()
-    encrypted_code = hashlib.sha224(verify_code).hexdigest()
-
-    if file_data == encrypted_code:
-        with open(file_path+'login.txt', 'w') as log:
-            new_password = str(new_password).encode()
-            encrypted_password = hashlib.sha224(new_password).hexdigest()
-            log.write(encrypted_password)
-        return True
-
-    else:
-        # Invalid Authentication Code
+        context = ssl.create_default_context()
+        with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+            server.login(sender_email, password)
+            server.sendmail(sender_email, receiver_email, message)
+            return True
+    except:
+        print("Fail")
         return False
 
-#if __name__ == "__main__":
-    #generate_reset_code()
-    #verify_reset_password_code("9HF18C", 1234)
-    #val = ""
-    #reset_code_mail('rajibhossain8521@gmail.com')
+def verify_reset_password_code(verify_code, new_password):
+    # READ VERIFICATION CODE FROM DATABASE
+    try:
+        connection = psycopg2.connect(
+            database='shop_management', 
+            user='postgres', 
+            password='12345',
+            port='5432')
+
+        cursor = connection.cursor()
+        cursor.execute('''SELECT * FROM owner_info''')
+        result = cursor.fetchone()
+        verification_code = result[1]
+    
+        verify_code = verify_code.encode()
+        encrypted_code = hashlib.sha224(verify_code).hexdigest()
+        
+        if verification_code == str(encrypted_code):
+            new_password = str(new_password).encode()
+            encrypted_password = hashlib.sha224(new_password).hexdigest()
+            encrypted_password = str(encrypted_password)
+            sql = ('''UPDATE owner_info SET password='%s' WHERE sl=0''') % encrypted_password
+            cursor.execute(sql)
+            connection.commit()
+            connection.close()
+            return True
+        else:
+            # Invalid Authentication Code
+            return False
+    except:
+        return False
+
+
+# if __name__ == "__main__":
+#     verify_reset_password_code("2EAC0F", 4321)
+#     #reset_code_mail('rajibhossain8521@gmail.com')
