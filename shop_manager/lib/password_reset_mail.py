@@ -77,6 +77,8 @@ def verify_reset_password_code(verify_code, new_password):
             encrypted_password = str(encrypted_password)
             sql = ('''UPDATE owner_info SET password='%s' WHERE sl=0''') % encrypted_password
             cursor.execute(sql)
+            sql = ('''UPDATE owner_info SET verification_code='' WHERE sl=0''')
+            cursor.execute(sql)
             connection.commit()
             connection.close()
             return True
