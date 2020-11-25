@@ -7,7 +7,7 @@ from PIL import Image, ImageTk
 sys.path.append('C:/Users/HP/Desktop/ShopApp/shop_manager/lib')
 # Local Packages
 from login import login_validation
-from password_reset_mail import *
+from password_reset import *
 from home_window import Home_window
 
 global impage_file_path
