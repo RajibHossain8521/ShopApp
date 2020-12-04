@@ -34,21 +34,27 @@ class Customer_Info_Window:
         ).place(x=20,)
 
         #================================================
-        # CUSTOMER AND ACCOUNT INFO
+        # SHOP: CUSTOMER AND ACCOUNT INFO
         #================================================
+        serial_num = StringVar()
+        phone_num = StringVar()
+        customer_name = StringVar()
+        customer_address = StringVar()
+        total_due = StringVar()
+        exist_due = StringVar()
+        last_payment = StringVar()
+        total_shopping = StringVar()
 
-        
-        
         customer_info_frame = Frame(
             self.master, 
             bd=3, 
             padx=50, 
             pady=20, 
-            bg='white',
+            bg='#ffe6e6',
             width=600,
-            height=600,
+            height=605,
             relief=RIDGE
-        ).place(x=20, y=40)
+        ).place(x=30, y=40)
 
         self.personal_info_level = Label(
             self.master,
@@ -59,90 +65,285 @@ class Customer_Info_Window:
 
         self.serial_no_level = Label(
             self.master,
-            bg='yellow',
             text="ক্রমিক নং:",
             font=("Courier", 12, 'bold')
-        ).place(x=55, y=100)
+        ).place(x=60, y=107)
+
+        self.serial_no_field = Entry(
+            self.master,
+            font = ('Courier', 14, 'bold'),
+            textvariable=serial_num,
+            bd=3,
+        )
+        self.serial_no_field.pack()
+        self.serial_no_field.place(x=180, y=105, height=30, width=170)
 
         self.phone_no_level = Label(
             self.master,
-            bg='yellow',
             text="ফোন নাম্বার:",
             font=("Courier", 12, 'bold')
-        ).place(x=38, y=135)
+        ).place(x=43, y=142)
+
+        self.phone_no_field = Entry(
+            self.master,
+            font = ('Courier', 14, 'bold'),
+            textvariable=phone_num,
+            bd=3,
+        )
+        self.phone_no_field.pack()
+        self.phone_no_field.place(x=180, y=140, height=30, width=170)
 
         self.name_level = Label(
             self.master,
-            bg='yellow',
             text="নাম:",
             font=("Courier", 12, 'bold')
-        ).place(x=105, y=170)
+        ).place(x=110, y=177)
+
+        self.name_field = Entry(
+            self.master,
+            font = ('Courier', 14, 'bold'),
+            textvariable=customer_name,
+            bd=3,
+        )
+        self.name_field.pack()
+        self.name_field.place(x=180, y=175, height=30, width=170)
 
         self.address_level = Label(
             self.master,
-            bg='yellow',
             text="অ্যাড্রেস:",
             font=("Courier", 12, 'bold')
-        ).place(x=70, y=205)
+        ).place(x=75, y=212)
 
-        self.personal_info_level = Label(
+        self.address_field = Entry(
+            self.master,
+            font = ('Courier', 14, 'bold'),
+            textvariable=customer_address,
+            bd=3,
+        )
+        self.address_field.pack()
+        self.address_field.place(x=180, y=210, height=30, width=170)
+
+        self.account_level = Label(
             self.master,
             bg='yellow',
             text="হিসাব",
             font=("Courier", 12, 'bold')
-        ).place(x=280, y=250)
-
-        self.tota_due_level = Label(
-            self.master,
-            bg='yellow',
-            text="মোট বাকী:",
-            font=("Courier", 12, 'bold')
-        ).place(x=50, y=300)
-
-        self.exist_due_level = Label(
-            self.master,
-            bg='yellow',
-            text="অবশিষ্ঠ্য:",
-            font=("Courier", 12, 'bold')
-        ).place(x=68, y=335)
+        ).place(x=280, y=270)
 
         self.last_payment_level = Label(
             self.master,
-            bg='yellow',
             text="সর্বশেষ জমা:",
             font=("Courier", 12, 'bold')
-        ).place(x=32, y=370)
+        ).place(x=37, y=312)
 
-        self.total_bazar_level = Label(
+        self.last_payment_field = Entry(
             self.master,
-            bg='yellow',
+            font = ('Courier', 14, 'bold'),
+            textvariable=last_payment,
+            bd=3,
+        )
+        self.last_payment_field.pack()
+        self.last_payment_field.place(x=180, y=310, height=30, width=170)
+
+        self.exist_due_level = Label(
+            self.master,
+            text="অবশিষ্ঠ্য:",
+            font=("Courier", 12, 'bold')
+        ).place(x=73, y=352)
+
+        self.exist_due_field = Entry(
+            self.master,
+            font = ('Courier', 14, 'bold'),
+            textvariable=exist_due,
+            bd=3,
+        )
+        self.exist_due_field.pack()
+        self.exist_due_field.place(x=180, y=350, height=30, width=170)
+
+        self.total_shopping_level = Label(
+            self.master,
             text="মোট বাজার:",
             font=("Courier", 12, 'bold')
-        ).place(x=38, y=405)
+        ).place(x=43, y=392)
+
+        self.total_shopping_field = Entry(
+            self.master,
+            font = ('Courier', 14, 'bold'),
+            textvariable=total_shopping,
+            bd=3,
+        )
+        self.total_shopping_field.pack()
+        self.total_shopping_field.place(x=180, y=390, height=30, width=170)
+
+        self.total_due_level = Label(
+            self.master,
+            text="মোট বাকী:",
+            font=("Courier", 12, 'bold')
+        ).place(x=57, y=432)
+
+        self.total_due_field = Entry(
+            self.master,
+            font = ('Courier', 14, 'bold'),
+            textvariable=total_due,
+            bd=3,
+        )
+        self.total_due_field.pack()
+        self.total_due_field.place(x=180, y=430, height=30, width=170)
+
+        self.customer_info_button = Button(
+            self.master, 
+            text="সার্চ",
+            font=("Courier", 12, 'bold'),
+            #command=
+        )
+        self.customer_info_button.pack()
+        self.customer_info_button.place(x=100, y=550, height=30, width=150)
+
+        self.clear_customer_info_button = Button(
+            self.master, 
+            text="মুছুন",
+            font=("Courier", 12, 'bold'),
+            #command=
+        )
+        self.clear_customer_info_button.pack()
+        self.clear_customer_info_button.place(x=300, y=550, height=30, width=150)
 
         #================================================
-
+        # SHOP: Bill Section
+        #================================================
         payment_info_frame = Frame(
             self.master,
             bd=3, 
             padx=50, 
             pady=20, 
-            bg='white',
+            bg='#ffe6e6',
             width=600,
             height=300,
             relief=RIDGE
-        ).place(x=640, y=40)
+        ).place(x=650, y=40)
 
-        add_bazar_frame = Frame(
+        self.bill_info_level = Label(
+            self.master,
+            bg='yellow',
+            text="বিল পরিশোধ",
+            font=("Courier", 12, 'bold')
+        ).place(x=885, y=60)
+
+        self.payment_save_button = Button(
+            self.master, 
+            text="সেভ",
+            font=("Courier", 12, 'bold'),
+            #command=
+        )
+        self.payment_save_button.pack()
+        self.payment_save_button.place(x=750, y=290, height=30, width=150)
+
+        self.payment_update_button = Button(
+            self.master, 
+            text="আপডেট",
+            font=("Courier", 12, 'bold'),
+            #command=
+        )
+        self.payment_update_button.pack()
+        self.payment_update_button.place(x=950, y=290, height=30, width=150)
+
+        #==============================================
+        # SHOP: Add new shopping
+        #==============================================
+        add_shopping_frame = Frame(
             self.master,
             bd=3, 
             padx=50, 
             pady=20, 
-            bg='white',
+            bg='#ffe6e6',
             width=600,
             height=300,
             relief=RIDGE
-        ).place(x=640, y=345)
+        ).place(x=650, y=345)
+
+        self.new_shopping_info_level = Label(
+            self.master,
+            bg='yellow',
+            text="নতুন কেনাকাটা",
+            font=("Courier", 12, 'bold')
+        ).place(x=880, y=360)
+
+        self.shopping_save_button = Button(
+            self.master, 
+            text="সেভ",
+            font=("Courier", 12, 'bold'),
+            #command=
+        )
+        self.shopping_save_button.pack()
+        self.shopping_save_button.place(x=750, y=590, height=30, width=150)
+
+        self.shopping_update_button = Button(
+            self.master, 
+            text="আপডেট",
+            font=("Courier", 12, 'bold'),
+            #command=
+        )
+        self.shopping_update_button.pack()
+        self.shopping_update_button.place(x=950, y=590, height=30, width=150)
+
+        #==============================================
+        # SHOP: Shopping list
+        #==============================================
+        add_shopping_frame = Frame(
+            self.master,
+            bd=3, 
+            padx=50, 
+            pady=20, 
+            bg='#ffe6e6',
+            width=600,
+            height=605,
+            relief=RIDGE
+        ).place(x=1270, y=40)
+
+        self.new_shopping_info_level = Label(
+            self.master,
+            bg='yellow',
+            text="বাজার তথ্য",
+            font=("Courier", 12, 'bold')
+        ).place(x=1530, y=60)
+
+        month_list = ['January', 
+                    'February', 
+                    'March', 
+                    'April', 
+                    'May', 
+                    'June', 
+                    'July', 
+                    'August', 
+                    'September', 
+                    'October', 
+                    'November', 
+                    'December']
+        selected_month = StringVar()
+        selected_month.set(month_list[0])
+
+        self.month_menu = OptionMenu(self.master, selected_month, *month_list)
+        self.month_menu.pack()
+        self.month_menu.config(width=8, font=('Courier', '12', 'bold'))
+        self.month_menu.place(x=1375, y=590)
+
+        year_list = ['2020', '2021', '2022', '2023', '2024', '2025']
+        selected_year = StringVar()
+        selected_year.set(year_list[0])
+
+        self.year_menu = OptionMenu(self.master, selected_year, *year_list)
+        self.year_menu.pack()
+        self.year_menu.config(font=('Courier', '12', 'bold'))
+        self.year_menu.place(x=1510, y=590)
+
+        self.shopping_update_button = Button(
+            self.master, 
+            text="সার্চ",
+            font=("Courier", 12, 'bold'),
+            #command=
+        )
+        self.shopping_update_button.pack()
+        self.shopping_update_button.place(x=1605, y=590, height=32, width=100)
 
 
 if __name__ == "__main__":
