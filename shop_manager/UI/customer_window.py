@@ -45,6 +45,23 @@ class Customer_Info_Window:
         last_payment = StringVar()
         total_shopping = StringVar()
 
+        days_list = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16',
+         '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
+
+        month_list = ['January', 
+                    'February', 
+                    'March', 
+                    'April', 
+                    'May', 
+                    'June', 
+                    'July', 
+                    'August', 
+                    'September', 
+                    'October', 
+                    'November', 
+                    'December']
+        year_list = ['2020', '2021', '2022', '2023', '2024', '2025']
+
         customer_info_frame = Frame(
             self.master, 
             bd=3, 
@@ -73,7 +90,7 @@ class Customer_Info_Window:
             self.master,
             font = ('Courier', 14, 'bold'),
             textvariable=serial_num,
-            bd=3,
+            bd=2,
         )
         self.serial_no_field.pack()
         self.serial_no_field.place(x=180, y=105, height=30, width=170)
@@ -88,7 +105,7 @@ class Customer_Info_Window:
             self.master,
             font = ('Courier', 14, 'bold'),
             textvariable=phone_num,
-            bd=3,
+            bd=2,
         )
         self.phone_no_field.pack()
         self.phone_no_field.place(x=180, y=140, height=30, width=170)
@@ -103,7 +120,7 @@ class Customer_Info_Window:
             self.master,
             font = ('Courier', 14, 'bold'),
             textvariable=customer_name,
-            bd=3,
+            bd=2,
         )
         self.name_field.pack()
         self.name_field.place(x=180, y=175, height=30, width=170)
@@ -118,7 +135,7 @@ class Customer_Info_Window:
             self.master,
             font = ('Courier', 14, 'bold'),
             textvariable=customer_address,
-            bd=3,
+            bd=2,
         )
         self.address_field.pack()
         self.address_field.place(x=180, y=210, height=30, width=170)
@@ -140,7 +157,7 @@ class Customer_Info_Window:
             self.master,
             font = ('Courier', 14, 'bold'),
             textvariable=last_payment,
-            bd=3,
+            bd=2,
         )
         self.last_payment_field.pack()
         self.last_payment_field.place(x=180, y=310, height=30, width=170)
@@ -155,7 +172,7 @@ class Customer_Info_Window:
             self.master,
             font = ('Courier', 14, 'bold'),
             textvariable=exist_due,
-            bd=3,
+            bd=2,
         )
         self.exist_due_field.pack()
         self.exist_due_field.place(x=180, y=350, height=30, width=170)
@@ -170,7 +187,7 @@ class Customer_Info_Window:
             self.master,
             font = ('Courier', 14, 'bold'),
             textvariable=total_shopping,
-            bd=3,
+            bd=2,
         )
         self.total_shopping_field.pack()
         self.total_shopping_field.place(x=180, y=390, height=30, width=170)
@@ -185,7 +202,7 @@ class Customer_Info_Window:
             self.master,
             font = ('Courier', 14, 'bold'),
             textvariable=total_due,
-            bd=3,
+            bd=2,
         )
         self.total_due_field.pack()
         self.total_due_field.place(x=180, y=430, height=30, width=170)
@@ -229,6 +246,51 @@ class Customer_Info_Window:
             font=("Courier", 12, 'bold')
         ).place(x=885, y=60)
 
+        self.serial_no_payment_level = Label(
+            self.master,
+            text="ক্রমিক নং:",
+            font=("Courier", 12, 'bold')
+        ).place(x=695, y=107)
+
+        self.serial_no_payment_field = Entry(
+            self.master,
+            font = ('Courier', 14, 'bold'),
+            #textvariable=,
+            bd=2,
+        )
+        self.serial_no_payment_field.pack()
+        self.serial_no_payment_field.place(x=810, y=105, height=30, width=170)
+
+        self.phone_no_payment_level = Label(
+            self.master,
+            text="ফোন নাম্বার:",
+            font=("Courier", 12, 'bold')
+        ).place(x=680, y=145)
+
+        self.phone_no_payment_field = Entry(
+            self.master,
+            font = ('Courier', 14, 'bold'),
+            #textvariable=,
+            bd=2,
+        )
+        self.phone_no_payment_field.pack()
+        self.phone_no_payment_field.place(x=810, y=143, height=30, width=170)
+
+        self.payment_level = Label(
+            self.master,
+            text="জমা:",
+            font=("Courier", 12, 'bold')
+        ).place(x=738, y=187)
+
+        self.payment_field = Entry(
+            self.master,
+            font = ('Courier', 14, 'bold'),
+            #textvariable=,
+            bd=2,
+        )
+        self.payment_field.pack()
+        self.payment_field.place(x=810, y=185, height=30, width=170)
+
         self.payment_save_button = Button(
             self.master, 
             text="সেভ",
@@ -268,6 +330,75 @@ class Customer_Info_Window:
             font=("Courier", 12, 'bold')
         ).place(x=880, y=360)
 
+        self.shopping_level_serial_no = Label(
+            self.master,
+            text="ক্রমিক নং:",
+            font=("Courier", 12, 'bold')
+        ).place(x=695, y=400)
+
+        self.shopping_field_serial_no = Entry(
+            self.master,
+            font = ('Courier', 14, 'bold'),
+            #textvariable=,
+            bd=2,
+        )
+        self.shopping_field_serial_no.pack()
+        self.shopping_field_serial_no.place(x=810, y=400, height=30, width=170)
+
+        self.shopping_level_phone_no = Label(
+            self.master,
+            text="ফোন নাম্বার:",
+            font=("Courier", 12, 'bold')
+        ).place(x=680, y=440)
+
+        self.shopping_field_phone_no = Entry(
+            self.master,
+            font = ('Courier', 14, 'bold'),
+            #textvariable=,
+            bd=2,
+        )
+        self.shopping_field_phone_no.pack()
+        self.shopping_field_phone_no.place(x=810, y=440, height=30, width=170)
+
+        self.total_shopping_level = Label(
+            self.master,
+            text="জমা:",
+            font=("Courier", 12, 'bold')
+        ).place(x=738, y=485)
+
+        self.total_shopping_field = Entry(
+            self.master,
+            font = ('Courier', 14, 'bold'),
+            #textvariable=,
+            bd=2,
+        )
+        self.total_shopping_field.pack()
+        self.total_shopping_field.place(x=810, y=485, height=30, width=170)
+
+        shopping_day = StringVar()
+        shopping_day.set(days_list[0])
+
+        self.shopping_days_menu = OptionMenu(self.master, shopping_day, *days_list)
+        self.shopping_days_menu.pack()
+        self.shopping_days_menu.config(font=('Courier', '12', 'bold'))
+        self.shopping_days_menu.place(x=760, y=530)
+
+        shopping_month = StringVar()
+        shopping_month.set(month_list[0])
+
+        self.shopping_month_menu = OptionMenu(self.master, shopping_month, *month_list)
+        self.shopping_month_menu.pack()
+        self.shopping_month_menu.config(width=8, font=('Courier', '12', 'bold'))
+        self.shopping_month_menu.place(x=830, y=530)
+
+        shopping_year = StringVar()
+        shopping_year.set(year_list[0])
+
+        self.shopping_year_menu = OptionMenu(self.master, shopping_year, *year_list)
+        self.shopping_year_menu.pack()
+        self.shopping_year_menu.config(font=('Courier', '12', 'bold'))
+        self.shopping_year_menu.place(x=960, y=530)
+
         self.shopping_save_button = Button(
             self.master, 
             text="সেভ",
@@ -291,7 +422,7 @@ class Customer_Info_Window:
         #==============================================
         add_shopping_frame = Frame(
             self.master,
-            bd=3, 
+            bd=3,
             padx=50, 
             pady=20, 
             bg='#ffe6e6',
@@ -307,18 +438,6 @@ class Customer_Info_Window:
             font=("Courier", 12, 'bold')
         ).place(x=1530, y=60)
 
-        month_list = ['January', 
-                    'February', 
-                    'March', 
-                    'April', 
-                    'May', 
-                    'June', 
-                    'July', 
-                    'August', 
-                    'September', 
-                    'October', 
-                    'November', 
-                    'December']
         selected_month = StringVar()
         selected_month.set(month_list[0])
 
@@ -327,7 +446,6 @@ class Customer_Info_Window:
         self.month_menu.config(width=8, font=('Courier', '12', 'bold'))
         self.month_menu.place(x=1375, y=590)
 
-        year_list = ['2020', '2021', '2022', '2023', '2024', '2025']
         selected_year = StringVar()
         selected_year.set(year_list[0])
 
